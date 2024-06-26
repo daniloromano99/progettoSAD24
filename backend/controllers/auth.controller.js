@@ -62,11 +62,41 @@ export const signup = async (req, res) => {
     }
 }
 
-export const login = (req, res) => {
-    console.log("loginUser");
+export const login = async (req, res) => {
+    try {
+
+        const { username, password } = req.body;
+		const user = await User.findOne({ username });
+		const isPasswordCorrect = await bcrypt.compare(password, user?.password || ""); //se user è undefined allora user.password è undefined e quindi non esiste il confronto tra password e user.password
+
+        if (!user || isPasswordCorrect) {
+            return res.status(400).json({error:"username o password errati"});
+        }
+        
+        generateTokenAndSetCookie(user._id,res); //Token JWT
+
+        res.status(200).json({
+			_id: user._id,
+			fullName: user.fullName,
+			username: user.username,
+			profilePic: user.profilePic,
+		});
+
+
+
+    } catch (error) {
+        console.log("Errore nel login", error.message);
+        res.status(500).json({error: "Internal Server Error"});
+    }
 }
 
 export const logout = (req, res) => {
-    console.log("logoutUser");
+    try {
+        res.cookie("jwt", "", { maxAge: 0 }); //eliminiamo il cookie chiamato "jwt"
+		res.status(200).json({ message: "Sei uscito correttamente!" });
+    } catch (error) {
+        console.log("Errore nel logout", error.message);
+		res.status(500).json({ error: "Internal Server Error" });
+    }
 }
 
