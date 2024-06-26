@@ -67,7 +67,7 @@ export const login = async (req, res) => {
 
         const { username, password } = req.body;
 		const user = await User.findOne({ username });
-		const isPasswordCorrect = await bcrypt.compare(password, user?.password || ""); //se user è undefined allora user.password è undefined e quindi non esiste il confronto tra password e user.password
+		const isPasswordCorrect = await bcrypt.compare(password, user?.password || ""); //quel punto interrogativo si chiede se user è undefined allora user.password è undefined e quindi non esiste il confronto tra password e user.password
 
         if (!user || isPasswordCorrect) {
             return res.status(400).json({error:"username o password errati"});
