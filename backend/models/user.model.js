@@ -19,14 +19,15 @@ const userSchema = new mongoose.Schema(
 		gender: {
 			type: String,
 			required: true,
-			enum: ["maschio", "femmina"],
+			enum: ["male", "female"],
 		},
 		profilePic: {
 			type: String,
 			default: "",
 		},
+		// createdAt, updatedAt => Member since <createdAt>
 	},
-	{ timestamps: true } // createdAt, updatedAt => ES. utente creato alle 12:30
+	{ timestamps: true }
 );
 
 const User = mongoose.model("User", userSchema);

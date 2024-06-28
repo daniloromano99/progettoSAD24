@@ -1,14 +1,14 @@
 import mongoose from "mongoose";
 
-const conversationSchema = new mongoose.Schema(//gruppi di utenti che conversano => ho un vettore di partecipanti e di messaggi
+const conversationSchema = new mongoose.Schema(
 	{
-		participants: [//vettore di partecipanti
+		participants: [
 			{
 				type: mongoose.Schema.Types.ObjectId,
 				ref: "User",
 			},
 		],
-		messages: [//è un array di tutti i messaggi che saranno ovviamente di tipo Message
+		messages: [
 			{
 				type: mongoose.Schema.Types.ObjectId,
 				ref: "Message",
