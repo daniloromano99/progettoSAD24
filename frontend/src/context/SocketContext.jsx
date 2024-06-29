@@ -11,6 +11,7 @@ export const useSocketContext = () => {
 export const SocketContextProvider = ({ children }) => {
 	const [socket, setSocket] = useState(null);
 	const [onlineUsers, setOnlineUsers] = useState([]);
+	const [messages, setMessages] = useState([]);
 	const { authUser } = useAuthContext();
 
 	useEffect(() => {
@@ -28,6 +29,10 @@ export const SocketContextProvider = ({ children }) => {
 				setOnlineUsers(users);
 			});
 
+			socket.on("receiveMessage", (message) => {
+				setMessages((prevMessages) => [...prevMessages, message]);
+			});
+
 			return () => socket.close();
 		} else {
 			if (socket) {
@@ -36,6 +41,30 @@ export const SocketContextProvider = ({ children }) => {
 			}
 		}
 	}, [authUser]);
+
+	const sendMessage = (receiverId, text) => {
+		if (socket) {
+			const message = {
+				senderId: authUser._id,
+				receiverId,
+				text,
+			};
+			socket.emit("sendMessage", message);
+			setMessages((prevMessages) => [...prevMessages, message]);
+		}
+	};
+	const listenMessages = () => {
+		if (socket) {
+			socket.on("receiveMessage", (message) => {
+				setMessages((prevMessages) => [...prevMessages, message]);
+			});
+		}
+	};
+	const getMessages = () => {
+		if (socket) {
+			socket.emit("getMessages");
+		}
+	};
 
 	return <SocketContext.Provider value={{ socket, onlineUsers }}>{children}</SocketContext.Provider>;
 };

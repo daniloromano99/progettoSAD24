@@ -22,8 +22,9 @@ export const signup = async (req, res) => {
 
 		// https://avatar-placeholder.iran.liara.run/
 
-		const boyProfilePic = `https://avatar.iran.liara.run/public/boy?username=${username}`;
-		const girlProfilePic = `https://avatar.iran.liara.run/public/girl?username=${username}`;
+		//IMMAGINI PROFILO DEFAULT usando api online
+        const boyProfilePic = `https://robohash.org/${username}?set=set1`; // avatar maschile
+        const girlProfilePic = `https://api.multiavatar.com/${username}.svg?apikey=YOUR_API_KEY&gender=female`;
 
 		const newUser = new User({
 			fullName,

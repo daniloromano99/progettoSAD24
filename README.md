@@ -21,6 +21,7 @@ NODE_ENV=...
 ### Build the app
 
 ```shell
+npm run remove
 npm run build
 ```
 
