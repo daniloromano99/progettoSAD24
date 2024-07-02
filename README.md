@@ -1,5 +1,5 @@
 ### CrossChat
-    CrossChat è un'app di messaggistica avanzata che offre un'esperienza di comunicazione in tempo reale, sicura e altamente reattiva. Sfruttando le più moderne tecnologie, CrossChat garantisce prestazioni elevate e un'interfaccia utente intuitiva e piacevole.
+    CrossChat è un'app di messaggistica avanzata che offre un'esperienza di comunicazione in tempo reale, sicura e altamente reattiva. CrossChat garantisce ottime prestazioni e un'interfaccia utente intuitiva e piacevole.
  
     Caratteristiche principali
     - Tech stack: CrossChat è costruito utilizzando lo stack MERN (MongoDB, Express.js, React e Node.js), con l'aggiunta di Socket.io per la comunicazione in tempo reale e TailwindCSS insieme a Daisy UI per uno stile moderno e personalizzabile.
@@ -34,7 +34,6 @@ npm run remove
 ### Build the app
  
 ```shell
-npm run remove
 npm run build
 ```
  

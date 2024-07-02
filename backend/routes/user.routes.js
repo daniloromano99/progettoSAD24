@@ -4,6 +4,6 @@ import { getUsersForSidebar } from "../controllers/user.controller.js";
 
 const router = express.Router();
 
-router.get("/", protectRoute, getUsersForSidebar);
+router.get("/", protectRoute, getUsersForSidebar); //la funzione getUsersForSidebar si chiama quando l'utente nell'interfaccia grafica lo clicchiamo 
 
 export default router;
